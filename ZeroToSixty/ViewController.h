@@ -29,6 +29,7 @@ double y11;
 double x2;
 double y2;
 double distanceInFeet;
+int accuracyCheck;
 
 
 @interface ViewController : UIViewController<CLLocationManagerDelegate, NSFetchedResultsControllerDelegate>

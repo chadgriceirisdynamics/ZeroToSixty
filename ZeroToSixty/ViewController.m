@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "MasterViewController.h"
 
 @interface ViewController ()
 
@@ -30,6 +29,11 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    //sets background image on start up to off
+    UIImage *img = [UIImage imageNamed:@"Blank_Tree_Off.png"];
+    [_backGroundImage setImage:img];
+    
+    
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
@@ -47,6 +51,44 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//background image changer
+- (void)backGroundImageChanger{
+    UIImage *img1 = [UIImage imageNamed:@"Blank_Tree_Pre.png"];
+    [_backGroundImage setImage:img1];
+    [self performSelector:@selector(bgImage2) withObject:nil afterDelay:1.5];
+}
+- (void)bgImage2{
+    UIImage *img2 = [UIImage imageNamed:@"Blank_Tree_Pre&Stage.png"];
+    [_backGroundImage setImage:img2];
+    [self performSelector:@selector(bgImage3) withObject:nil afterDelay:2];
+}
+- (void)bgImage3{
+    UIImage *img3 = [UIImage imageNamed:@"Blank_Tree_Top.png"];
+    [_backGroundImage setImage:img3];
+    [self performSelector:@selector(bgImage4) withObject:nil afterDelay:.5];
+}
+- (void)bgImage4{
+    UIImage *img4 = [UIImage imageNamed:@"Blank_Tree_Middle.png"];
+    [_backGroundImage setImage:img4];
+    [self performSelector:@selector(bgImage5) withObject:nil afterDelay:.5];
+}
+- (void)bgImage5{
+    UIImage *img5 = [UIImage imageNamed:@"Blank_Tree_Bottom.png"];
+    [_backGroundImage setImage:img5];
+    [self performSelector:@selector(bgImage6) withObject:nil afterDelay:.5];
+}
+- (void)bgImage6{
+    UIImage *img6 = [UIImage imageNamed:@"Blank_Tree_Green.png"];
+    [_backGroundImage setImage:img6];
+}
+
+
+
+
+    
+    
+
 
 #pragma mark - CLLocationManagerDelegate
 
@@ -127,6 +169,8 @@
     //stops things when data is collected and vehicle slows at least 5mph less than max speed
     if (maxspeed > (currentspeed + 5)) {
         [countUpTimer invalidate];
+        UIImage *img = [UIImage imageNamed:@"Blank_Tree_Red.png"];
+        [_backGroundImage setImage:img];
     }
 }
 
@@ -138,10 +182,13 @@
     startPosition = 1;
     eightArmed = 1;
     qrtArmed = 1;
+    [self backGroundImageChanger];
 }
 
 - (IBAction)stopTest:(id)sender {
     [countUpTimer invalidate];
+    UIImage *img = [UIImage imageNamed:@"Blank_Tree_Red.png"];
+    [_backGroundImage setImage:img];
    
 }
 
